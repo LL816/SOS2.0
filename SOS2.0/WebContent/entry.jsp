@@ -108,12 +108,12 @@
 	<form id="inputInfo" action="${pageContext.request.contextPath }/Login" method="post">
 		<div id="title1">user name</div> <div id="content1"><input type="text" id="username" name="username" height="1000" required="required"/><br></div>
 		<div id="nameMessage">6~18 characters</div>
-		<div id="title2">password</div> <div id="content2"><input type="text" id="passwd" name="passwd" required="required"/><br></div>
+		<div id="title2">password</div> <div id="content2"><input type="password" id="passwd" name="passwd" required="required"/><br></div>
 		<div id="passwdMessage">6~18 characters</div>
 		<div id="login"><input type="submit" value="登录" style = "font-size:25px; width:100px; height:50px"/></div>
 		<div id="statusMessage">${statusMessage }</div>
-		<div id="randomImageInput"><input type="text" /></div>
-		<div id="randomImage"><img src="${pageContext.request.contextPath }/RandomImage" onclick="changeImage(this)"></div>
+		<div id="randomImageInput"><input type="text" id="inputRandom" name="inputRandom"/></div>
+		<div id="randomImage"><img src="${pageContext.request.contextPath }/RandomImage" id="imageRandom" name="imageRandom" onclick="changeImage(this)"></div>
 	</form>
 	<form action="${pageContext.request.contextPath }/register.jsp" method="get">
 		<div id="register">

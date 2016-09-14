@@ -9,6 +9,9 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+
+import org.apache.catalina.connector.Request;
+
 import cheryl.sos.utils.RandomImageGenerator;
 /**
  * Servlet implementation class RandomImage
@@ -27,6 +30,7 @@ public class RandomImage extends HttpServlet {
 		OutputStream out = response.getOutputStream();
 		RandomImageGenerator generator= new RandomImageGenerator();
 		generator.generateImage();
+		request.getSession().setAttribute("random", generator.random.toString());
 		ImageIO.write(generator.image, "jpg", out);
 	}
 

@@ -10,6 +10,7 @@ public class RandomImageGenerator {
 	public static final int WIDTH=120;
 	public static final int HEIGHT=25;
 	public BufferedImage image = null;
+	public StringBuffer random=new StringBuffer();
 	
 	public RandomImageGenerator(){
 		if (image ==null){
@@ -22,10 +23,10 @@ public class RandomImageGenerator {
 		setBackground(g);
 		setBorder(g);
 		drawRandomLine(g);
-		String num = drawRandomNum((Graphics2D)g);
+		this.random = drawRandomNum((Graphics2D)g);
 		
 	}
-	private String drawRandomNum(Graphics2D g) {
+	private StringBuffer drawRandomNum(Graphics2D g) {
 		g.setColor(Color.BLACK);
 		g.setFont(new Font("¿¬Ìå",Font.BOLD,20));
 		
@@ -44,7 +45,7 @@ public class RandomImageGenerator {
 			g.rotate(-degree*Math.PI/180, posX, posY);
 			posX = posX +30;			
 		}
-		return num.toString();
+		return num;
 	}
 
 	private void drawRandomLine(Graphics g) {

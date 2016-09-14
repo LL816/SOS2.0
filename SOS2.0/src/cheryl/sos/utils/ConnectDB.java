@@ -17,63 +17,64 @@ public class ConnectDB {
 	static Properties prop = new Properties();
 	static FileInputStream inStream = null;
 	
-	static{
+	static{//只需要加载一次
 		try {
-			inStream = new FileInputStream("src/db.properties");
-		} catch (FileNotFoundException e) {
-			throw new RuntimeException(e);
-		}
-		try {
-			prop.load(inStream);
+			prop.load(ConnectDB.class.getClassLoader().getResourceAsStream("db.properties"));
+// A resource is some data (images, audio, text, etc) that can be accessed by class code in a way that is independent of the location of the code.
+//			inStream = new FileInputStream("db.properties"); 如果项目发布，或是移动位置，可能导致找不到文件
+
 		} catch (IOException e) {
-			throw new RuntimeException(e);
+			throw new ExceptionInInitializerError(e);//不是异常，是错误
 		}
 		
 		try {
 			String driver = prop.getProperty("jdbc.driver");
+
 			Class.forName(driver);
 			
 		} catch (ClassNotFoundException e) {
 			throw new RuntimeException(e);
 		}				
+		
+	}
+	
+	public static Connection getConnection(){//创建连接
 		try {
 			String url = prop.getProperty("jdbc.url");
 			String user = prop.getProperty("jdbc.user");
-			String passwd = prop.getProperty("jdbc.password");
+			String passwd = prop.getProperty("jdbc.passwd");
+
 			conn = DriverManager.getConnection(url, user, passwd);
 		} catch (SQLException e) {
 			throw new RuntimeException(e);
 		}
-		
+		return conn;
 	}
-	
-	public static boolean insert(String sql){
-		try {
-			ps = conn.prepareStatement(sql);
-		} catch (SQLException e) {
-			throw new RuntimeException(e);
+	public static void release(Connection conn, PreparedStatement ps, ResultSet rs){//销毁连接
+		if(conn!=null){
+			try {
+				conn.close();
+			} catch (SQLException e) {
+				throw new RuntimeException(e);
+			}
+			rs=null;
 		}
-		
-		return false;
-	}
-	
-	public static boolean delete(String sql){
-		try {
-			ps = conn.prepareStatement(sql);
-		} catch (SQLException e) {
-			throw new RuntimeException(e);
+		if(ps!=null){
+			try{
+				ps.close();
+			}catch (SQLException e) {
+				throw new RuntimeException(e);
+			}
+			ps=null;
+		}		
+		if(rs!=null){
+			try{
+				rs.close();
+			}catch (SQLException e) {
+				throw new RuntimeException(e);
+			}
+			rs=null;
 		}
-		
-		return false;
-	}
-	public static boolean select(String sql){
-		try {
-			ps = conn.prepareStatement(sql);
-		} catch (SQLException e) {
-			throw new RuntimeException(e);
-		}
-		
-		return false;
 	}
 			
 }
