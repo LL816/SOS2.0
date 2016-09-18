@@ -24,14 +24,12 @@ public class Login extends HttpServlet {
 		request.setCharacterEncoding("UTF-8");
 		String input = request.getParameter("inputRandom");
 		String defined = (String) request.getSession().getAttribute("random");
-		String url="";
+		String url="/entry.jsp";
 		if(input.isEmpty()){
 			request.setAttribute("statusMessage", "验证码不能为空");
-			url = "/entry.jsp";
 		}
 		else if(!input.equals(defined)){
 			request.setAttribute("statusMessage", "验证码不匹配");
-			url = "/entry.jsp";
 		}
 		else{
 			UserServiceImpl service = new UserServiceImpl();
@@ -41,7 +39,6 @@ public class Login extends HttpServlet {
 			status = service.login(username,passwd);
 			if(!status){
 				request.setAttribute("statusMessage", service.messageBuffer);
-				url = "/entry.jsp";
 			}
 			else{		
 				request.setAttribute("statusMessage", service.messageBuffer);

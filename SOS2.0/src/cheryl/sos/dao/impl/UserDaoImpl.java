@@ -8,13 +8,25 @@ import cheryl.sos.service.impl.DBmethodsImp;
 import cheryl.sos.utils.*;
 
 public class UserDaoImpl implements UserDao  {
-	public boolean userAdd(String ... var){
+	public boolean userAdd(LinkedHashMap<String, String> data){
 		boolean status=false;
-		String sql=null;
 		DBmethodsImp dbI=new DBmethodsImp();
-		
-		sql = "insert into ordering.usersinfo (?) values (?) ";
-		
+		StringBuffer sql = new StringBuffer();
+		sql.append("insert into ordering.usersinfo (");
+		Set<String> keys = data.keySet();
+		for(String key:keys){
+			sql.append(key);
+			sql.append(", ");
+		}
+		sql.replace(sql.lastIndexOf(","), sql.lastIndexOf(",")+2, ") ");
+		sql.append("values (");
+		for(String key:keys){
+			sql.append("?, ");
+		}
+		sql.replace(sql.lastIndexOf(","), sql.lastIndexOf(",")+2, ") ");
+		if(dbI.insert(sql.toString(),data)){
+			status = true;
+		}
 		return status;
 	}
 	public boolean userDelete(String ... var){

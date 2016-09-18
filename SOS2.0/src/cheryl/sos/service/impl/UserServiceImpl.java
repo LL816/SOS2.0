@@ -8,9 +8,16 @@ import cheryl.sos.service.*;
 public class UserServiceImpl implements UserService{
 	public String messageBuffer="";
 	@Override
-	public boolean register() {
-		
-		return false;
+	public boolean register(String username, String passwd) {
+		UserDaoImpl userDaoI=new UserDaoImpl();
+		LinkedHashMap<String, String> data = new LinkedHashMap<String, String>();
+		data.put("user_name", username);
+		data.put("passwd", passwd);
+		if(userDaoI.userAdd(data)){
+			return true;
+		}else{
+			return false;
+		}
 	}
 
 	@Override
@@ -38,6 +45,15 @@ public class UserServiceImpl implements UserService{
 			
 		}
 
+	}
+
+	@Override
+	public boolean checkValidation(String content, String item) {//用户名和密码需要不同的命名规范时，用item判断需要验证的是哪一套规范
+		int contentLength = content.length();
+		if(contentLength>18 || contentLength<6){
+			return false;
+		}
+		return true;
 	}
 	
 }

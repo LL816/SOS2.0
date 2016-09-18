@@ -12,14 +12,23 @@ import java.util.Set;
 import cheryl.sos.utils.ConnectDB;
 
 public class DBmethodsImp {
-	public boolean insert(String sql){
+	public boolean insert(String sql,LinkedHashMap<String, String> data){
 		Connection conn = null; 
 		PreparedStatement ps = null;
-		ResultSet rs = null;
+		ResultSet rs =null;
 		try{
 			conn = ConnectDB.getConnection();
 			try {
 				 ps = conn.prepareStatement(sql);
+				 Set<Entry<String, String>> ens = data.entrySet();
+				 int index=1;
+				 for(Entry<String, String> en:ens){
+					 ps.setString(index, en.getValue());
+					 index++;
+				 }
+				 if(ps.executeUpdate()!=0){
+					 return true;
+				 }
 			} catch (SQLException e) {
 				throw new RuntimeException(e);
 			}

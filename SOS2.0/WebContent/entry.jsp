@@ -1,6 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <%@taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
+
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
 <head>
@@ -12,94 +13,7 @@
 	}
 </script>
 <%--排版无法完成兼容，浏览器页面大小变化会影响各模块分布 --%>
-<style type="text/css">
-	body{
-		margin:0px;
-		padding:0px;
-		font-size:14px;
-		background-color:#9999FF;
-		overflow:hidden:
-		text-align:center;		
-	}
-	#inputArea{
-		border:3px solid green;
-		margin:auto;
-		background-image:url('login.png');
-		width:869px;
-		height:265px;
-
-	}
-	#title1{
-
-		font-size:40px;
-		text-transform:uppercase;
-		position:absolute;
-		top:40%;
-		left:30%;
-	}	
-	#content1{
-		position:absolute;
-		top:41.5%;
-		left:45%;	
-	}
-	#nameMessage{
-		color:blue;
-		position:absolute;
-		top:41.5%;
-		left:60%;	
-		font-size:20px;
-	}
-	#title2{
-		font-size:40px;
-		text-transform:uppercase;
-		position:absolute;
-		top:50%;
-		left:30%;
-	}
-	#content2{
-		position:absolute;
-		top:51.5%;
-		left:45%;
-
-	}
-	#passwdMessage{
-		color:blue;
-		position:absolute;
-		top:51.5%;
-		left:60%;
-		font-size:20px;
-	}
-	#login{
-		position:absolute;
-		top:75%;
-		left:40%;
-
-	}
-	#register{
-		position:absolute;
-		top:75%;
-		left:60%;
-
-	}
-	#statusMessage{
-		color:red;
-		position:absolute;
-		top:67%;
-		left:40%;
-		font-size:20px;
-	}
-	#randomImageInput{
-		position:absolute;
-		top:60%;
-		left:40%;
-	}
-	#randomImage{
-		position:absolute;
-		top:60%;
-		left:55%;
-	}
-
-</style>
+<link rel="stylesheet" href="${pageContext.request.contextPath}/css/style.css">
 
 </head>
 
