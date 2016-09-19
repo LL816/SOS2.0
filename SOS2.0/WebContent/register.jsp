@@ -6,15 +6,30 @@
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <title>Register</title>
 <link rel="stylesheet" href="${pageContext.request.contextPath }/css/registerstyle.css">
+<script>
+	function checkPasswdInput(statusMessage){
+		var passwd1 = document.getElementById("passWd");
+		var passwd2 = document.getElementById("passWd2");
+		if(passwd1.value == passwd2.value){
+			return true;
+		}
+		else{
+			alert("两次密码不相符");
+			return false;
+		}
+	}
+</script>
+
 </head>
 <body>
 <div id="RegisterinputArea">
-	<form id="inputInfo" action="${pageContext.request.contextPath }/Register" method="post">
-		<div id="title1">user name</div> <div id="content1"><input type="text" id="username" name="username" height="1000" required="required"/><br></div>
+																							<%-- onsubmit="return false" 不提交--%>
+	<form id="inputInfo" action="${pageContext.request.contextPath }/Register" method="post" onsubmit="return checkPasswdInput(${statusMessage})">
+		<div id="title1">user name</div> <div id="content1"><input type="text" id="userName" name="userName" height="1000" required="required"/><br></div>
 		<div id="nameMessage">6~18 characters</div>
-		<div id="title2">password</div> <div id="content2"><input type="password" id="passwd" name="passwd" required="required"/><br></div>
+		<div id="title2">password</div> <div id="content2"><input type="password" id="passWd" name="passWd" required="required"/><br></div>
 		<div id="passwdMessage">6~18 characters</div>
-		<div id="title3">password</div> <div id="content3"><input type="password" id="passwd2" name="passwd2" required="required"/><br></div>
+		<div id="title3">password</div> <div id="content3"><input type="password" id="passWd2" name="passWd2" required="required"/><br></div>
 		<div id="passwdMessage2">Re-enter your password</div>
 		
 		<div id="submit"><input type="submit" value="提交" style = "font-size:25px; width:100px; height:50px"/></div>

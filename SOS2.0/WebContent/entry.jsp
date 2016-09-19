@@ -20,9 +20,9 @@
 <body>
 <div id="inputArea">
 	<form id="inputInfo" action="${pageContext.request.contextPath }/Login" method="post">
-		<div id="title1">user name</div> <div id="content1"><input type="text" id="username" name="username" height="1000" required="required"/><br></div>
+		<div id="title1">user name</div> <div id="content1"><input type="text" id="userName" name="userName" height="1000" required="required"/><br></div>
 		<div id="nameMessage">6~18 characters</div>
-		<div id="title2">password</div> <div id="content2"><input type="password" id="passwd" name="passwd" required="required"/><br></div>
+		<div id="title2">password</div> <div id="content2"><input type="password" id="passWd" name="passWd" required="required"/><br></div>
 		<div id="passwdMessage">6~18 characters</div>
 		<div id="login"><input type="submit" value="登录" style = "font-size:25px; width:100px; height:50px"/></div>
 		<div id="statusMessage">${statusMessage }</div>

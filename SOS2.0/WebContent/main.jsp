@@ -7,6 +7,6 @@
 <title>Congrats</title>
 </head>
 <body>
-
+<%@ include file="head.jsp" %>
 </body>
 </html>

@@ -34,8 +34,9 @@ public class Login extends HttpServlet {
 		else{
 			UserServiceImpl service = new UserServiceImpl();
 			boolean status=false;
-			String username = request.getParameter("username");
-			String passwd = request.getParameter("passwd");
+			String username = request.getParameter("userName");
+			String passwd = request.getParameter("passWd");
+			request.getSession().setAttribute("userName", username);
 			status = service.login(username,passwd);
 			if(!status){
 				request.setAttribute("statusMessage", service.messageBuffer);
