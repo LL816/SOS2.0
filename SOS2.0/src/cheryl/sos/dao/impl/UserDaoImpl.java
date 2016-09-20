@@ -8,6 +8,7 @@ import cheryl.sos.domain.UserInfo;
 import cheryl.sos.utils.*;
 
 public class UserDaoImpl implements UserDao  {
+	public int userId=-1;
 	public boolean userAdd(UserInfo user){
 
 		Connection conn = null; 
@@ -65,6 +66,7 @@ public class UserDaoImpl implements UserDao  {
 				}	
 				rs = ps.executeQuery();
 				if(rs.next()){
+					this.userId = rs.getInt("user_id");
 					return true;
 				}
 			} catch (SQLException e) {

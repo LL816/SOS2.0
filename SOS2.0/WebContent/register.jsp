@@ -7,7 +7,7 @@
 <title>Register</title>
 <link rel="stylesheet" href="${pageContext.request.contextPath }/css/registerstyle.css">
 <script>
-	function checkPasswdInput(statusMessage){
+	function checkPasswdInput(){
 		var passwd1 = document.getElementById("passWd");
 		var passwd2 = document.getElementById("passWd2");
 		if(passwd1.value == passwd2.value){
@@ -24,7 +24,7 @@
 <body>
 <div id="RegisterinputArea">
 																							<%-- onsubmit="return false" 不提交--%>
-	<form id="inputInfo" action="${pageContext.request.contextPath }/Register" method="post" onsubmit="return checkPasswdInput(${statusMessage})">
+	<form id="inputInfo" action="${pageContext.request.contextPath }/Register" method="post" onsubmit="return checkPasswdInput()">
 		<div id="title1">user name</div> <div id="content1"><input type="text" id="userName" name="userName" height="1000" required="required"/><br></div>
 		<div id="nameMessage">6~18 characters</div>
 		<div id="title2">password</div> <div id="content2"><input type="password" id="passWd" name="passWd" required="required"/><br></div>
