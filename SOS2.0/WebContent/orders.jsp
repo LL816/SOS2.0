@@ -27,7 +27,7 @@
 		<th>商品总价</th>
 		<th>选择订单</th>
 	</tr>
-	<c:forEach var="c" items="${requestScope.orders}">
+	<c:forEach var="c" items="${requestScope.pageDisplayInfo.getDataToBeDisplayed()}">
 	<tr>
 		<td>${c.merchandiseName }</td>
 		<td>${c.merchandisePrice }</td>
@@ -44,5 +44,30 @@ ${statusMessage}
 
 <input type="submit" name="orderSubmit" value="删除订单" style="font-size:25px; width:150px; height:50px">
 </form>
+<br>
+<br>
+<script>
+  function gethref(){
+	  var target = document.getElementById("goto");
+	  var source = document.getElementById("numGoto");
+	 
+	  target.href= "${pageContext.request.contextPath }/Orders?currentPageNum="+source.value;
+  }
+</script>
+<form>
+<a href="${pageContext.request.contextPath }/Orders?currentPageNum=${pageDisplayInfo.getPreviousPageNum()}">上一页                          </a>   
+共${pageDisplayInfo.getTotalPageNum()}页       
+<input type="number" min=1 max=${pageDisplayInfo.getTotalPageNum() } id="numGoto" value=1>
+<a id="goto" href="" onclick="gethref()">GO</a>    
+
+<c:forEach var="chosenNum" items="${pageDisplayInfo.getPageBar()}">
+	<a href="${pageContext.request.contextPath }/Orders?currentPageNum=${chosenNum.intValue()}">${chosenNum.intValue()}</a>   
+</c:forEach>
+
+<a href="${pageContext.request.contextPath }/Orders?currentPageNum=${pageDisplayInfo.getNextPageNum()}">下一页</a>   
+</form>
+<br>
+<br>
+
 </body>
 </html>
