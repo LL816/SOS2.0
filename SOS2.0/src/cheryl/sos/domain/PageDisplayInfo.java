@@ -63,13 +63,13 @@ public class PageDisplayInfo {
 	public void setLimitInOnePage(int limitInOnePage) {
 		this.limitInOnePage = limitInOnePage;
 		this.startIndex=(this.currentPageNum-1)*this.limitInOnePage;
-		this.previousPageNum = this.currentPageNum>1?(this.currentPageNum-1):1;
 		this.totalPageNum = this.totalIndex % this.limitInOnePage == 0 ? (this.totalIndex / this.limitInOnePage) : (this.totalIndex / this.limitInOnePage +1);
-		this.nextPageNum = this.currentPageNum<this.totalPageNum?(this.currentPageNum+1):this.totalPageNum;
-		this.dataToBeDisplayed = data.subList(startIndex, (startIndex+limitInOnePage)<totalIndex?(startIndex+limitInOnePage):totalIndex);
+		pageBar.clear();
 		for(int i=1;i<=this.totalPageNum;i++){
 			pageBar.add(i);
 		}
+		this.dataToBeDisplayed = data.subList(startIndex, (startIndex+limitInOnePage)<totalIndex?(startIndex+limitInOnePage):totalIndex);
+
 	}
 	public int getCurrentPageNum() {
 		return currentPageNum;
@@ -78,10 +78,8 @@ public class PageDisplayInfo {
 		this.currentPageNum = currenPageNum;
 		this.startIndex=(this.currentPageNum-1)*this.limitInOnePage;
 		this.previousPageNum = this.currentPageNum>1?(this.currentPageNum-1):1;
-		this.totalPageNum = this.totalIndex % this.limitInOnePage == 0 ? (this.totalIndex / this.limitInOnePage) : (this.totalIndex / this.limitInOnePage +1);
 		this.nextPageNum = this.currentPageNum<this.totalPageNum?(this.currentPageNum+1):this.totalPageNum;
 		this.dataToBeDisplayed = data.subList(startIndex, (startIndex+limitInOnePage)<totalIndex?(startIndex+limitInOnePage):totalIndex);
-
 	}
 	public int getPreviousPageNum() {
 		return previousPageNum;

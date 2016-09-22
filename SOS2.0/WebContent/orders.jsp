@@ -47,24 +47,38 @@ ${statusMessage}
 <br>
 <br>
 <script>
-  function gethref(){
-	  var target = document.getElementById("goto");
-	  var source = document.getElementById("numGoto");
-	 
-	  target.href= "${pageContext.request.contextPath }/Orders?currentPageNum="+source.value;
+function gotohref(id){
+	  var target = document.getElementById(id);	 
+	  var limit = document.getElementById("limit");
+	  var number = document.getElementById("numGoto");
+	  target.href= "${pageContext.request.contextPath }/Orders?currentPageNum="+number.value+"&limitInOnePage="+limit.value;
+
+}
+  function gethref(id,currentPageNum){
+	  var target = document.getElementById(id);	 
+	  var limit = document.getElementById("limit");
+
+	  target.href= "${pageContext.request.contextPath }/Orders?currentPageNum="+currentPageNum+"&limitInOnePage="+limit.value;
+
   }
 </script>
 <form>
-<a href="${pageContext.request.contextPath }/Orders?currentPageNum=${pageDisplayInfo.getPreviousPageNum()}">上一页                          </a>   
+每页最多显示<input type="text" min=1 max=100 value=${pageDisplayInfo.getLimitInOnePage()} name="limitInOnePage" id="limit">行数据
+
 共${pageDisplayInfo.getTotalPageNum()}页       
-<input type="number" min=1 max=${pageDisplayInfo.getTotalPageNum() } id="numGoto" value=1>
-<a id="goto" href="" onclick="gethref()">GO</a>    
+第<input type="number" min=1 max=${pageDisplayInfo.getTotalPageNum() } id="numGoto" value=${pageDisplayInfo.getCurrentPageNum() }>页
+<a id="goto" href="" onclick="gotohref(this.id)">GO</a>    
+
+<br>
+<br>
+<a id="pre" href="" onclick="gethref(this.id,${pageDisplayInfo.getPreviousPageNum()})">上一页 </a>   
+
 
 <c:forEach var="chosenNum" items="${pageDisplayInfo.getPageBar()}">
-	<a href="${pageContext.request.contextPath }/Orders?currentPageNum=${chosenNum.intValue()}">${chosenNum.intValue()}</a>   
+	<a id=${chosenNum.intValue()} href="" onclick="gethref(this.id,${chosenNum.intValue()})">${chosenNum.intValue()}</a>   
 </c:forEach>
 
-<a href="${pageContext.request.contextPath }/Orders?currentPageNum=${pageDisplayInfo.getNextPageNum()}">下一页</a>   
+<a id="next" href="" onclick="gethref(this.id,${pageDisplayInfo.getNextPageNum()})">下一页</a>   
 </form>
 <br>
 <br>

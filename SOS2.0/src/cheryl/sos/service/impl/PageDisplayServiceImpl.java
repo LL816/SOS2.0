@@ -15,13 +15,13 @@ public class PageDisplayServiceImpl implements PageDisplayService{
 		
 		PageDisplayInfo pageDisplayInfo = new PageDisplayInfo(orders);
 		
-		if(currentPageNum!=null){
-			pageDisplayInfo.setCurrentPageNum(Integer.parseInt(currentPageNum));
-		}
-		if(limitInOnePage!=null){
+
+		if(limitInOnePage!=null && Integer.parseInt(limitInOnePage)!=pageDisplayInfo.getLimitInOnePage()){
 			pageDisplayInfo.setLimitInOnePage(Integer.parseInt(limitInOnePage));
 		}
-		
+		if(currentPageNum!=null&& Integer.parseInt(currentPageNum)!=pageDisplayInfo.getCurrentPageNum()){
+			pageDisplayInfo.setCurrentPageNum(Integer.parseInt(currentPageNum));
+		}
 		
 		return pageDisplayInfo;
 	}
